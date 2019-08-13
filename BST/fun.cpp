@@ -67,9 +67,9 @@ node* tree::tree_search(node* &z, int k)
 	}
 }
 
-node* tree::tree_minimum()
+node* tree::tree_minimum(node* &z)
 {
-	node* x = root;
+	node* x = z;
 
 	while (x->left != NULL)
 	{
@@ -79,9 +79,9 @@ node* tree::tree_minimum()
 	return x;
 }
 
-node* tree::tree_maximum()
+node* tree::tree_maximum(node* &z)
 {
-	node* x = root;
+	node* x = z;
 
 	while (x->right != NULL)
 	{
@@ -89,6 +89,117 @@ node* tree::tree_maximum()
 	}
 
 	return x;
+}
+
+node* tree::tree_successor(node* &z)
+{
+	if (z->right != NULL)
+	{
+		return tree_minimum(z->right);
+	}
+
+	node* y = z->p;
+	node* ptr = z;
+
+	while (y != NULL && ptr == y->right)
+	{
+		ptr = y;
+		y = y->p;
+	}
+
+	return y;
+}
+
+void tree::transplant(node* u, node* &v)
+{
+	if (u->p == NULL)
+	{
+		root = v;
+	}
+	
+	else if (u == u->p->left)
+	{
+		u->p->left = v;
+	}
+
+	else
+	{
+		u->p->right = v;
+	}
+
+	if (v != NULL)
+	{
+		v->p = u->p;
+	}
+}
+
+void tree::tree_delete(node* &z)
+{
+	if (z->left == NULL)
+	{
+		transplant(z, z->right);
+	}
+
+	else if (z->right == NULL)
+	{
+		transplant(z, z->left);
+	}
+
+	else
+	{
+		node* y = tree_minimum(z->right);
+
+		if (y->p != z)
+		{
+			transplant(y, y->right);
+			y->right = z->right;
+			y->right->p = y;
+		}
+
+		transplant(z, y);
+		y->left = z->left;
+		y->left->p = y;
+	}
+}
+
+int tree::tree_height(node* &z)
+{
+	if (z == NULL)
+	{
+		return 0;
+	}
+
+	return max(tree_height(z->left), tree_height(z->right)) + 1;
+}
+
+void tree::inorder_walk(node* &z)
+{
+	if (z != NULL)
+	{
+		inorder_walk(z->left);
+		cout << z->key << " ";
+		inorder_walk(z->right);
+	}
+}
+
+void tree::postorder_walk(node* &z)
+{
+	if (z != NULL)
+	{
+		inorder_walk(z->left);
+		inorder_walk(z->right);
+		cout << z->key << " ";
+	}
+}
+
+void tree::preorder_walk(node* &z)
+{
+	if (z != NULL)
+	{
+		cout << z->key << " ";
+		inorder_walk(z->left);
+		inorder_walk(z->right);
+	}
 }
 
 void tree::print_Util(node* root, int space)
