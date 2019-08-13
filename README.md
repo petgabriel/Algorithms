@@ -1,2 +1,4 @@
 # BST
-* deletion of node does't work, gonna fix this later
+* deletion of node does't work properly
+# Red-Black tree
+* work in progress
