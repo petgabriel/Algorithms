@@ -27,10 +27,19 @@ public:
 
 	tree();
 
-	node* tree_minimum();
-	node* tree_maximum();
+	int tree_height(node* &z);
+
+	node* tree_minimum(node* &z);
+	node* tree_maximum(node* &z);
 	node* tree_search(node* &z, int key);
+	node* tree_successor(node* &z);
+
+	void inorder_walk(node* &z);
+	void postorder_walk(node* &z);
+	void preorder_walk(node* &z);
 	void tree_insert(node* &z);
 	void print_tree();
 	void print_Util(node* root, int space);
+	void transplant(node* u, node* &v);
+	void tree_delete(node* &z);
 };
