@@ -1,35 +1,43 @@
 #include "header.h"
 
-int main( int argc, char* argv[] )
+int main(int argc, char* argv[])
 {
 	srand( (unsigned int)time( NULL ) );
 
 	tree T;
 
-	node* tmp = new node(28);
-
-	T.RB_insert(tmp);
-
-	tmp = new node(37);
-
-	T.RB_insert(tmp);
-
-	tmp = new node(68);
-
-	T.RB_insert(tmp);
-
-	/*( int i = 1; i <= 8; i++ )
+	for (int i = 1; i <= 8; i++)
 	{
-		int t = rand() % 100 + 1;
+		int t = rand() % 1000 + 1;
+		node* tmp = new node(t);
+		cout << t << " ";
+		T.tree_insert(tmp);
+	}
 
-		node* tmp = new node( t );
+	cout << endl << "- - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
 
-		T.RB_insert( tmp );
+	T.print_tree();
+
+	cout << endl << "- - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
+
+	cout << "minimum: " << T.tree_minimum()->key << endl;
+	cout << "maximum: " << T.tree_maximum()->key << endl;
+
+	int k = rand() % 1000 + 1;
+
+	cout << "searching for: " << k << " -> ";
+
+	node* z = T.tree_search(T.root, k);
+
+	if (z != NULL)
+	{
+		cout << "found! " << endl;
+	}
+	else
+	{
+		cout << "No node with this key!" << endl;
 	}
 	
-	T.print_RB_tree();
-	*/
 	system("pause");
-
 	return 0;
 }
