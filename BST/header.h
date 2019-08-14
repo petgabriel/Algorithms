@@ -40,6 +40,6 @@ public:
 	void tree_insert(node* &z);
 	void print_tree();
 	void print_Util(node* root, int space);
-	void transplant(node* u, node* &v);
+	void transplant(node* &u, node* &v);
 	void tree_delete(node* &z);
 };
