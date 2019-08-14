@@ -110,7 +110,7 @@ node* tree::tree_successor(node* &z)
 	return y;
 }
 
-void tree::transplant(node* u, node* &v)
+void tree::transplant(node* &u, node* &v)
 {
 	if (u->p == NULL)
 	{
@@ -156,8 +156,9 @@ void tree::tree_delete(node* &z)
 			y->right->p = y;
 		}
 
-		transplant(z, y);
-		y->left = z->left;
+		node* ptr = z;
+		transplant(ptr, y);
+		y->left = ptr->left;
 		y->left->p = y;
 	}
 }
@@ -211,8 +212,12 @@ void tree::print_Util(node* root, int space)
 	print_Util(root->right, space);
 
 	cout << endl;
+	
 	for (int i = COUNT; i < space; i++)
+	{
 		cout << " ";
+	}
+
 	cout << root->key << endl;
 
 	print_Util(root->left, space);
