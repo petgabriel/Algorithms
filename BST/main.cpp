@@ -6,7 +6,11 @@ int main(int argc, char* argv[])
 
 	tree T;
 
-	for (int i = 1; i <= 8; i++)
+	node* a = new node(500);
+
+	T.tree_insert(a);
+
+	for (int i = 1; i <= 10; i++)
 	{
 		int t = rand() % 1000 + 1;
 		node* tmp = new node(t);
@@ -66,13 +70,13 @@ int main(int argc, char* argv[])
 
 	cout << endl << "Deleting root: " << endl;
 
-	/*T.tree_delete(T.root);
+	T.tree_delete(T.root);
 
 	cout << endl << "- - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
 
 	T.print_tree();
 
-	cout << endl << "- - - - - - - - - - - - - - - - - - - - - - - - -" << endl;*/
+	cout << endl << "- - - - - - - - - - - - - - - - - - - - - - - - -" << endl;
 
 	system("pause");
 
