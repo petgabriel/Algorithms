@@ -25,7 +25,10 @@ public:
 	int cut_rod(int n);
 	int memoized_cut_rod(int n);
 	int memoized_cut_rod_aux(int n);
-
+	int bottom_up_cut_rot(int n);
+	
+	void extended_bottom_up_cut_road(int n);
+	void print_cut_rod_solution(int n);
 	void print_prices();
 
 };
