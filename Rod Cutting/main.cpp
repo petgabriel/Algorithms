@@ -4,10 +4,11 @@ int main(int argc,char* argv[])
 {
 	rod R;
 
+	int n;
+
 #ifdef USERS_DATA
 
 	int i = 0;
-	int n;
 	int* p;
 
 	cout << "Size of price array: ";
@@ -34,8 +35,6 @@ int main(int argc,char* argv[])
 	
 #else
 
-	int n;
-
 	cout << "Size of price array: ";
 	cin >> n;
 
@@ -43,10 +42,21 @@ int main(int argc,char* argv[])
 
 #endif
 
-	int N = 4;
+	int N;
+	cout << "Enter number to find solution: ";
+	cin >> N;
 
-	cout << "Cut rod: " << R.cut_rod(N) << endl;
-	cout << "Memoized cut rod: " << R.memoized_cut_rod(N) << endl;
+	if (N > n)
+	{
+		cout << "Solution doesn't exist!" << endl;
+	}
+
+	cout << endl << "Cut rod: " << R.cut_rod(N) << endl;
+	cout << "Memoized top-down cut rod: " << R.memoized_cut_rod(N) << endl;
+	cout << "Memoized bottom-up cut rod: " << R.bottom_up_cut_rot(N) << endl << endl;
+	cout << "Solution to length " << N <<": ";
+	R.print_cut_rod_solution(N);
+	cout << endl;
 
 	system("pause");
 
