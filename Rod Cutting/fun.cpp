@@ -13,7 +13,7 @@ rod::rod(int n)
 
 	p = (int*)calloc(n, sizeof(int));
 	r = (int*)calloc(n + 1, sizeof(int));
-	s = (int*)calloc(n, sizeof(int));
+	s = (int*)calloc(n + 1, sizeof(int));
 
 	for (int i = 0; i < n; i++)
 	{
@@ -27,7 +27,7 @@ rod::rod(int* p, int n)
 	this->p = p;
 
 	r = (int*)calloc(n + 1, sizeof(int));
-	s = (int*)calloc(n, sizeof(int));
+	s = (int*)calloc(n + 1, sizeof(int));
 }
 
 int rod::cut_rod(int n)
@@ -84,6 +84,59 @@ int rod::memoized_cut_rod_aux(int n)
 	r[n] = q;
 
 	return q;
+}
+
+int rod::bottom_up_cut_rot(int n)
+{
+	r[0] = 0;
+
+	for (int j = 1; j <= n; j++)
+	{
+		int q = INT_MIN;
+
+		for (int i = 1; i <= j; i++)
+		{
+			q = max(q, p[i - 1] + r[j - i]);
+		}
+
+		r[j] = q;
+	}
+
+	return r[n];
+}
+
+void rod::extended_bottom_up_cut_road(int n)
+{
+	r[0] = 0;
+
+	for (int j = 1; j <= n; j++)
+	{
+		int q = INT_MIN;
+
+		for (int i = 1; i <= j; i++)
+		{
+			if (q < p[i - 1] + r[j - i])
+			{
+				q = p[i - 1] + r[j - i];
+				s[j] = i;
+			}
+		}
+
+		r[j] = q;
+	}
+}
+
+void rod::print_cut_rod_solution(int n)
+{
+	extended_bottom_up_cut_road(n);
+
+	while (n > 0)
+	{
+		cout << s[n] << " ";
+		n = n - s[n];
+	}
+
+	cout << endl;
 }
 
 void rod::print_prices()
